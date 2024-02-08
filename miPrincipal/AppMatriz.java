@@ -1,5 +1,7 @@
 package miPrincipal;
 
+import java.util.Scanner;
+
 // Definición de la clase AppMatriz
 public class AppMatriz {
     
@@ -10,22 +12,38 @@ public class AppMatriz {
 		System.out.println("    Operaciones con Matrices      ");
         System.out.println("==================================");
         
-        // Se crea una nueva matriz de tamaño 2x3
-        Matriz m = new Matriz(2, 3);
+        // Se solicita al usuario que ingrese el número de filas y columnas de la matriz
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el número de filas de la matriz: ");
+        int filas = scanner.nextInt();
+        System.out.print("Ingrese el número de columnas de la matriz: ");
+        int columnas = scanner.nextInt();
         
-        // Se asigna un valor a un elemento específico de la matriz
-        m.asignarMatriz(0, 0, 5);
-        // Se imprime el valor del elemento asignado anteriormente
-        System.out.println("Valor del elemento 0,0=" + m.infoMat(0, 0));
-        // Se imprime el valor de un elemento de la matriz que no ha sido asignado aún, lo que debería lanzar una excepción
-        System.out.println("Valor del elemento 1,0=" + m.infoMat(1, 0));
-
-        // Se intenta obtener el valor de un elemento de la matriz sin asignar, lo que debería lanzar una excepción
-        m.infoMat(0, 0);
+        // Se crea una nueva matriz con las dimensiones proporcionadas por el usuario
+        Matriz m = new Matriz(filas, columnas);
         
-        // Se imprime el número de filas de la matriz
+        // Se solicita al usuario que llene la matriz
+        System.out.println("Ingrese los valores de la matriz:");
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                System.out.print("Ingrese el valor para la posición [" + i + "," + j + "]: ");
+                int valor = scanner.nextInt();
+                m.asignarMatriz(i, j, valor);
+            }
+        }
+        
+        // Se muestra la matriz ingresada por el usuario
+        System.out.println("Matriz ingresada:");
+        int[][] matriz = m.getMatriz();
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                System.out.print(matriz[i][j] + "\t");
+            }
+            System.out.println();
+        }
+        
+        // Se imprime el número de filas y columnas de la matriz
         System.out.println("Filas = " + m.filasMat());
-        // Se imprime el número de columnas de la matriz
-        System.out.println("Columnas =" + m.columnasMat());
+        System.out.println("Columnas = " + m.columnasMat());
     }
 }
